@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Resultado{% endblock %}
+
+{% block content %}
+{% for doctor in doctors %}
+	<div class="card pt-2 mb-4 shadow">
+	  	<h5 class="card-header text-primary">{{ doctor.title }}</h5>
+	  	<div class="card-body">
+	  		{% if doctor.phone %}
+				<p class="card-text fw-bold">Contato: {{ doctor.phone }}</p>
+			{% else %}
+				<p class="card-text fw-bold">Contato: Indefinido</p>
+			{% endif %}
+
+			{% if doctor.address %}
+				<p class="card-text fw-bold">Endereço: {{ doctor.address }}</p>
+			{% else %}
+				<p class="card-text fw-bold">Horário: Indefinido</p>
+			{% endif %}
+
+			{% if doctor.hours %}
+				<p class="card-text fw-bold">Horário: {{ doctor.hours }}</p>
+			{% else %}
+				<p class="card-text fw-bold">Horário: Indefinido</p>
+			{% endif %}
+
+			{% if doctor.rating %}
+				<p class="card-text fw-bold">Nota de avaliação: {{ doctor.rating }}</p>
+			{% else %}
+				<p class="card-text fw-bold">Nota de avaliação: Sem avaliação</p>
+			{% endif %}
+
+			<div class="pt-3">
+				{% if doctor.links %}
+					{% if doctor.links["website"] %}
+						<a href="{{ doctor.links['website'] }}" target="_blank" class="btn btn-sm btn-primary">Ver fonte</a>
+					{% else %}
+						<button type="button" class="btn btn-sm btn-primary" disabled>Ver fonte</button>
+					{% endif %}
+					{% if doctor.links["directions"] %}
+						<a href="{{ doctor.links['directions'] }}" target="_blank" class="btn btn-sm btn-primary">Ver no mapa</a>
+					{% else %}
+						<button type="button" class="btn btn-sm btn-primary" disabled>Ver no mapa</button>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endfor %}
+{% endblock %}
